@@ -16,6 +16,9 @@ Created on Thu Aug  1 16:49:13 2019
 
 import pandas as pd
 import numpy as np
+import normalcalc
+from normalcalc import getFaceNormal
+
 
 def list2csv(myList, fname):
     '''
@@ -100,7 +103,10 @@ def vrml2csv(f, root):
               if len(ln) == 9:
                   list2csv(coordIndex, root+'_index_'+str(nodeCount)+'.csv')
                   break
-       
+          # calculate face normal
+          print('Calculating face normals.')
+          getFaceNormal(root, nodeCount)
+         
 if __name__ == "__main__":                
     #root = '/Users/yifan/worms/vrml2csv/2018-01-24_GSC_L4_L4440RNAi_reg'
     root=input('Please enter the root of your vrml file:')
