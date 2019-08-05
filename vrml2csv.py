@@ -6,7 +6,13 @@ Created on Thu Aug  1 16:49:13 2019
 @author: yifan
 """
 
-#vrml2csv
+# vrml2csv converter
+# There is no support for features other than vertex coordinate, 
+#   vertex normals, and coordinate indices.
+# The script has been tested on a large vrml file created by Imaris, 
+#   and running with python 3 under macOS10.14 
+
+
 
 import pandas as pd
 import numpy as np
@@ -96,7 +102,8 @@ def vrml2csv(f, root):
                   break
        
 if __name__ == "__main__":                
-    root = '/Users/yifan/worms/vrml2csv/2018-01-24_GSC_L4_L4440RNAi_reg'
+    #root = '/Users/yifan/worms/vrml2csv/2018-01-24_GSC_L4_L4440RNAi_reg'
+    root=input('Please enter the root of your vrml file:')
     print('Converting ',root+'.wrl...')
     f=open(root+'.wrl')
     vrml2csv(f,root)
