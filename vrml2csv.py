@@ -113,4 +113,4 @@ if __name__ == "__main__":
     root=input('Please enter the root of your vrml file:')
     print('Converting ',root+'.wrl...')
     f=open(root+'.wrl')
-    vrml2csv(f,root, calculateFaceNormal = False)
+    vrml2csv(f,root, calculateFaceNormal = True)
