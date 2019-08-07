@@ -109,8 +109,8 @@ def vrml2csv(f, root, calculateFaceNormal = False):
               getFaceNormal(root, nodeCount)
          
 if __name__ == "__main__":                
-    root = '/Users/yifan/worms/vrml2csv/2018-01-24_GSC_L4_L4440RNAi_reg'
-#    root=input('Please enter the root of your vrml file:')
+#    root = '/Users/yifan/worms/vrml2csv/2018-01-24_GSC_L4_L4440RNAi_reg'
+    root=input('Please enter the root of your vrml file:')
     print('Converting ',root+'.wrl...')
     f=open(root+'.wrl')
     vrml2csv(f,root, calculateFaceNormal = False)
