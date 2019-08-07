@@ -14,13 +14,11 @@ Created on Thu Aug  1 16:49:13 2019
 
 
 
-import pandas as pd
-import numpy as np
-import normalcalc
+from numpy import matrix, savetxt
 from normalcalc import getFaceNormal
 
 
-def list2csv(myList, fname):
+def list2csv(myList, fname, FMT = '%.6f'):
     '''
     *************************************************************************
     *myList*: a 2D list of floating point numbers                           *
@@ -29,11 +27,12 @@ def list2csv(myList, fname):
     *This function converts a 2D list to a csv (with index and no header)   *
     *************************************************************************
     '''
-    mat = np.matrix(myList) #list to matrix
-    df = pd.DataFrame(data = mat.astype(float)) #matrix to dataframe
-    df.to_csv(fname, sep = ',', header = False) #dataframe to csv
+    mat = matrix(myList) #list to matrix
+    savetxt(fname, mat.astype(float),fmt = FMT, delimiter=',')
+    #df = pd.DataFrame(data = mat.astype(float)) #matrix to dataframe
+    #df.to_csv(fname, sep = ',', header = False) #dataframe to csv
  
-def vrml2csv(f, root):
+def vrml2csv(f, root, calculateFaceNormal = False):
     '''
     **************************************************************************
     *f*: file pointer, to a vrml file                                        * 
@@ -101,15 +100,17 @@ def vrml2csv(f, root):
                   coordIndex.append([ln[0][:-1],ln[1][:-1],ln[2][:-1]])
                   coordIndex.append([ln[4][:-1],ln[5][:-1],ln[6][:-1]])
               if len(ln) == 9:
-                  list2csv(coordIndex, root+'_index_'+str(nodeCount)+'.csv')
+                  list2csv(coordIndex, root+'_index_'+str(nodeCount)+'.csv',
+                                                                  FMT = '%.0f') 
                   break
           # calculate face normal
           print('Calculating face normals.')
-          getFaceNormal(root, nodeCount)
+          if calculateFaceNormal == True:
+              getFaceNormal(root, nodeCount)
          
 if __name__ == "__main__":                
-    #root = '/Users/yifan/worms/vrml2csv/2018-01-24_GSC_L4_L4440RNAi_reg'
-    root=input('Please enter the root of your vrml file:')
+    root = '/Users/yifan/worms/vrml2csv/2018-01-24_GSC_L4_L4440RNAi_reg'
+#    root=input('Please enter the root of your vrml file:')
     print('Converting ',root+'.wrl...')
     f=open(root+'.wrl')
-    vrml2csv(f,root)
+    vrml2csv(f,root, calculateFaceNormal = False)
