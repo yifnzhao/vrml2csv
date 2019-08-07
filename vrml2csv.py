@@ -29,8 +29,8 @@ def list2csv(myList, fname, FMT = '%.6f'):
     '''
     mat = matrix(myList) #list to matrix
     savetxt(fname, mat.astype(float),fmt = FMT, delimiter=',')
-    #df = pd.DataFrame(data = mat.astype(float)) #matrix to dataframe
-    #df.to_csv(fname, sep = ',', header = False) #dataframe to csv
+   
+
  
 def vrml2csv(f, root, calculateFaceNormal = False):
     '''
