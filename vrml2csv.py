@@ -83,7 +83,8 @@ def vrml2csv(f, root, calculateFaceNormal = False):
           while 1:
               ln = f.readline().split()
               if len(ln)>2:
-                  ln[2] = ln[2][:-1] 
+                  if ln[2].endswith(','):
+                      ln[2] = ln[2][:-1] 
                   normalVector.append(ln[0:3])
               if ln == ['}']:
                   list2csv(normalVector, root+'_normal_'+str(nodeCount)+'.csv')
@@ -109,7 +110,6 @@ def vrml2csv(f, root, calculateFaceNormal = False):
               getFaceNormal(root, nodeCount)
          
 if __name__ == "__main__":                
-#    root = '/Users/yifan/worms/vrml2csv/2018-01-24_GSC_L4_L4440RNAi_reg'
     root=input('Please enter the root of your vrml file:')
     print('Converting ',root+'.wrl...')
     f=open(root+'.wrl')
